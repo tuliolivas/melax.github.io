@@ -1,46 +1,74 @@
-## What this is
-A static personal website published at **www.melax.com**, combining a current character-selection landing page and profile page with an archive of game-development and graphics/physics writeups. It is aimed at visitors browsing the site and developers looking for explanations, sample code, and older demos.
+# melax.github.io
 
-### Stack
-- **Language(s):** HTML, CSS, JavaScript, and a small C++ example
-- **Framework / runtime:** Static pages served by a web server; no application framework
-- **Notable libraries:** None required. Some pages load fonts from Google Fonts.
+A static personal website published at **www.melax.com**. It combines a character-selection landing page and profile page with an archive of game-development, graphics, physics, and AI writeups. The site is mostly standalone HTML documents, with CSS, JavaScript, media assets, and a small C++ example.
 
-## How it's organized
+## Contents
+
+- **Personal pages:** a character-selection homepage and profile/placeholder pages.
+- **Graphics and physics notes:** mesh volume and mass properties, matrix diagonalization, spring derivatives, and BSP collision detection.
+- **AI example:** an explanation and C++ implementation of a reinforcement-learning Tetris experiment.
+- **Game demos:** pages documenting the Teeter and Tea Party mini-games.
+
+## Repository layout
+
 ```text
 /
-  index.html       Character-selection landing page; links to profile pages
-  Cassandra.html   “Coming soon” page; the detailed profile is under /cassandra
-  Jean.html        “Coming soon” profile page
-  Mackenzie.html   “Coming soon” profile page
-  Nala.html        “Coming soon” profile page
-  Stan.html        “Coming soon” profile page
-  diag.html        Quaternion-based diagonalization of symmetric 3×3 matrices
-  volint.html      Mesh volume, center-of-mass, and inertia-tensor calculations
-  bsp/             BSP collision-detection paper, demos page, and images
-  cassandra/       Cassandra’s profile page and its assets
-  dspring/         Spring-derivative and cloth-simulation writeup, with illustrations
-  minigames/       Pages describing the Teeter and Tea Party games
-  tetris/          Reinforcement-learning writeup, C++ example, and illustrations
-  Background.png   Landing-page background
-  Melaxlogo.png    Landing-page logo
-  CNAME            Custom domain configuration
+  index.html              Character-selection landing page
+  Cassandra.html          Placeholder page; full profile is under cassandra/
+  Jean.html               Placeholder profile page
+  Mackenzie.html          Placeholder profile page
+  Nala.html               Placeholder profile page
+  Stan.html               Placeholder profile page
+  diag.html               Quaternion-based diagonalization of symmetric 3x3 matrices
+  volint.html             Mesh volume, center-of-mass, and inertia-tensor calculations
+  Background.png          Landing-page background
+  Melaxlogo.png           Site logo
+  CNAME                   Custom domain configuration
+
+  bsp/                    BSP collision-detection article, paper, and images
+  cassandra/              Cassandra profile page and assets
+  dspring/                Spring-derivative writeup and illustrations
+  minigames/              Teeter and Tea Party game descriptions
+  tetris/                 Reinforcement-learning writeups, C++ example, and images
 ```
 
-**How it fits together:** The root `index.html` links visitors to profile pages, while the technical articles and demonstrations are separate static pages under their own paths. The writeups cross-link related topics—for example, `volint.html` links to `diag.html`, and the Tetris article links to `learning.html` and the C++ example. There is no shared application or build pipeline tying the sections together.
+### Notable pages and files
 
-## How to run it
-There is no README, package/build manifest, or test command in the repository. To preview the static site locally:
+- `index.html` links to the profile pages and uses the root-level images for its visual design.
+- `cassandra/index.html` contains a profile page; `Cassandra.html` is a separate “Coming soon” page.
+- `volint.html` presents code and background for computing the volume, center of mass, and inertia tensor of a triangle mesh. It links to `diag.html`, which describes diagonalizing the symmetric tensor to obtain its principal moments and axes.
+- `dspring/dspring.html` explains spring force derivatives and their use in simulation.
+- `bsp/index.html` describes dynamic plane-shifting BSP traversal and links to `bsp/melaxbsp.pdf`. It also refers to a demo archive, `BSPdemos2001.zip`.
+- `tetris/learning.html` introduces reinforcement learning; `tetris/tetris.html` documents the experiment; `tetris/tetris.cpp` contains the example program.
+- `minigames/index.html` describes Teeter and Tea Party and refers to `teeter.zip` and `teaparty.zip`.
+
+## Stack and tooling
+
+- **Languages:** HTML, CSS, JavaScript, and a small amount of C++.
+- **Runtime:** static files served by a web server; no application framework.
+- **Dependencies/build:** no package manager, dependency manifest, or build step is required. Some pages request fonts from Google Fonts.
+- **Tests:** no automated test suite is provided.
+
+## Preview locally
+
+With Python 3 installed, serve the repository root:
 
 ```bash
-git clone https://github.com/melax/melax.github.io.git
+git clone https://github.com/tuliolivas/melax.github.io.git
 cd melax.github.io
 python3 -m http.server 8000
 ```
 
-Then open `http://localhost:8000`. The repository’s `CNAME` points to `www.melax.com`, consistent with static-site hosting.
+Then visit <http://localhost:8000>.
 
-## Try asking
-- How does `tetris/tetris.cpp` update its state-value table while it plays?
-- How do `volint.html` and `diag.html` work together to calculate principal axes?
-- Which downloadable files referenced by `bsp/index.html` and `minigames/index.html` are present in the repository?
+## Publishing
+
+The root `CNAME` file contains `www.melax.com`, indicating the configured custom domain. The pages are static and can be served directly by a compatible static host; no compilation is needed.
+
+## Download availability
+
+The repository includes `bsp/melaxbsp.pdf`. The demo archives linked from the pages—`bsp/BSPdemos2001.zip`, `minigames/teeter.zip`, and `minigames/teaparty.zip`—are referenced by the HTML but are not present in the repository.
+
+## License
+
+No repository-wide license is specified in the root files. Check with the maintainer before reusing content or assets if you need explicit permission.
